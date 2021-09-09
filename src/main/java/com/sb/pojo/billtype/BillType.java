@@ -29,12 +29,12 @@ public class BillType {
     /**
      * 影响库存1
      */
-    private String stockSort1Id;
+    private Integer stockSort1Id;
 
     /**
      * 影响库存2
      */
-    private String stockSort2Id;
+    private Integer stockSort2Id;
 
     /**
      * 节点号
@@ -44,7 +44,7 @@ public class BillType {
     /**
      * 业务分类
      */
-    private String businessTypeId;
+    private Integer businessTypeId;
 
     /**
      * 资金方向

@@ -1,4 +1,4 @@
-package com.sb.pojo.stocksort;
+package com.sb.pojo.checkplan;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,23 +7,18 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class StockSort {
+public class CheckPlan {
 
     private Integer id;
 
     /**
-     * 编码
+     * 组织
      */
-    private String code;
+    private Integer orgId;
 
     /**
-     * 名称
+     * 业务类型
      */
-    private String name;
-
-    /**
-     * 是否调平
-     */
-    private Boolean tp;
+    private Integer businessTypeId;
 
 }

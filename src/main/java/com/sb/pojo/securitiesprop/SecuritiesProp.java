@@ -1,4 +1,4 @@
-package com.sb.pojo.actionlog;
+package com.sb.pojo.securitiesprop;
 
 import java.util.Date;
 
@@ -9,18 +9,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ActionLogB {
+public class SecuritiesProp {
 
     private Integer id;
 
-    private Integer actionLogId;
-
-    private Integer businessTypeId;
-
-    private Integer orgId;
-
-    private Integer actionId;
+    private Integer securitiesId;
 
     private Date tradeDate;
+
+    private Integer propertyId;
 
 }

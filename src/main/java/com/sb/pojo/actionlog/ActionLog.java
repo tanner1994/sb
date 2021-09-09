@@ -13,9 +13,9 @@ public class ActionLog {
 
     private Integer id;
 
-    private String businessTypeId;
+    private Integer businessTypeId;
 
-    private String orgId;
+    private Integer orgId;
 
     private Date tradeDate1;
 

@@ -1,4 +1,6 @@
-package com.sb.pojo.bourse;
+package com.sb.pojo.tally;
+
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Bourse {
+public class Tally {
 
     private Integer id;
 
@@ -15,8 +17,10 @@ public class Bourse {
 
     private String name;
 
-    private String shortName;
+    private Date tallyDate;// 期初记账日期
 
-    private Integer parentId;
+    private Integer orgId;
+
+    private String remark;
 
 }

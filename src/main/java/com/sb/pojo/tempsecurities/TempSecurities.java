@@ -1,4 +1,4 @@
-package com.sb.pojo.bourse;
+package com.sb.pojo.tempsecurities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,16 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Bourse {
+public class TempSecurities {
 
     private Integer id;
 
-    private String code;
-
-    private String name;
-
-    private String shortName;
-
-    private Integer parentId;
+    private Integer securitiesId;
 
 }

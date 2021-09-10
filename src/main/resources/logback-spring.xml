@@ -29,13 +29,16 @@
       </timeBasedFileNamingAndTriggeringPolicy>
     </rollingPolicy>
   </appender>
-  <!-- 开发环境（输出到控制台）  -->
-  <root level="${logbackLevel}">
-    <appender-ref ref="${logbackAppender}"/>
-  </root>
 
   <!-- 测试/线上环境（通过日期分割日志文件） -->
   <springProperty name="logbackAppender" scope="context" source="logback.appender"/>
   <!-- 设置日志级别和输出模式 -->
   <springProperty name="logbackLevel" scope="context" source="logback.level"/>
+
+  <!-- 开发环境（输出到控制台）  -->
+  <root level="${logbackLevel}">
+    <appender-ref ref="${logbackAppender}"/>
+  </root>
+
+
 </configuration>

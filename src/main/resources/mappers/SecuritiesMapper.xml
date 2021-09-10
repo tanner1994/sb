@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sb.dao.securities.SecuritiesMapper">
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from `sb_securities`
+    where `id` = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sb.dao.securities.model.SecuritiesExample">
+    delete from `sb_securities`
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sb.dao.securities.model.Securities">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into `sb_securities` (
+      `code`,
+      `help_code`,
+      `name`,
+      `bourse_id`,
+      `sclassify_id`,
+      `exercise_date`,
+      `exercise_price`,
+      `if_accrual`,
+      `if_fairdistill`,
+      `if_wfsy`
+    )
+    values (
+      #{code,jdbcType=VARCHAR},
+      #{helpCode,jdbcType=VARCHAR},
+      #{name,jdbcType=VARCHAR},
+      #{bourseId,jdbcType=INTEGER},
+      #{sclassifyId,jdbcType=INTEGER},
+      #{exerciseDate,jdbcType=DATE},
+      #{exercisePrice,jdbcType=DECIMAL},
+      #{ifAccrual,jdbcType=BIT},
+      #{ifFairdistill,jdbcType=BIT},
+      #{ifWfsy,jdbcType=BIT}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sb.dao.securities.model.Securities">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into `sb_securities`
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+      `code`,
+      </if>
+      <if test="helpCode != null">
+      `help_code`,
+      </if>
+      <if test="name != null">
+      `name`,
+      </if>
+      <if test="bourseId != null">
+      `bourse_id`,
+      </if>
+      <if test="sclassifyId != null">
+      `sclassify_id`,
+      </if>
+      <if test="exerciseDate != null">
+      `exercise_date`,
+      </if>
+      <if test="exercisePrice != null">
+      `exercise_price`,
+      </if>
+      <if test="ifAccrual != null">
+      `if_accrual`,
+      </if>
+      <if test="ifFairdistill != null">
+      `if_fairdistill`,
+      </if>
+      <if test="ifWfsy != null">
+      `if_wfsy`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="code != null">
+      #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="helpCode != null">
+      #{helpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+      #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="bourseId != null">
+      #{bourseId,jdbcType=INTEGER},
+      </if>
+      <if test="sclassifyId != null">
+      #{sclassifyId,jdbcType=INTEGER},
+      </if>
+      <if test="exerciseDate != null">
+      #{exerciseDate,jdbcType=DATE},
+      </if>
+      <if test="exercisePrice != null">
+      #{exercisePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="ifAccrual != null">
+      #{ifAccrual,jdbcType=BIT},
+      </if>
+      <if test="ifFairdistill != null">
+      #{ifFairdistill,jdbcType=BIT},
+      </if>
+      <if test="ifWfsy != null">
+      #{ifWfsy,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <resultMap id="BaseResultMap" type="com.sb.dao.securities.model.Securities">
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="code" jdbcType="VARCHAR" property="code"/>
+    <result column="help_code" jdbcType="VARCHAR" property="helpCode"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="bourse_id" jdbcType="INTEGER" property="bourseId"/>
+    <result column="sclassify_id" jdbcType="INTEGER" property="sclassifyId"/>
+    <result column="exercise_date" jdbcType="DATE" property="exerciseDate"/>
+    <result column="exercise_price" jdbcType="DECIMAL" property="exercisePrice"/>
+    <result column="if_accrual" jdbcType="BIT" property="ifAccrual"/>
+    <result column="if_fairdistill" jdbcType="BIT" property="ifFairdistill"/>
+    <result column="if_wfsy" jdbcType="BIT" property="ifWfsy"/>
+  </resultMap>
+  <select id="selectByExample" parameterType="com.sb.dao.securities.model.SecuritiesExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause"/>
+    </if>
+    from `sb_securities`
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <include refid="Base_Column_List"/>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from `sb_securities`
+    where `id` = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="countByExample" parameterType="com.sb.dao.securities.model.SecuritiesExample" resultType="java.lang.Integer">
+    select count(*) from `sb_securities`
+    <if test="_parameter != null">
+    <include refid="Example_Where_Clause"/>
+    </if>
+  </select>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                      #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    `id`, `code`, `help_code`, `name`, `bourse_id`, `sclassify_id`, `exercise_date`, `exercise_price`, `if_accrual`, `if_fairdistill`, `if_wfsy`
+  </sql>
+  <update id="updateByExampleSelective" parameterType="map">
+    update `sb_securities`
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+    <set>
+      <if test="record.code != null">
+      `code` = #{record.code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.helpCode != null">
+      `help_code` = #{record.helpCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+      `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bourseId != null">
+      `bourse_id` = #{record.bourseId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sclassifyId != null">
+      `sclassify_id` = #{record.sclassifyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.exerciseDate != null">
+      `exercise_date` = #{record.exerciseDate,jdbcType=DATE},
+      </if>
+      <if test="record.exercisePrice != null">
+      `exercise_price` = #{record.exercisePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.ifAccrual != null">
+      `if_accrual` = #{record.ifAccrual,jdbcType=BIT},
+      </if>
+      <if test="record.ifFairdistill != null">
+      `if_fairdistill` = #{record.ifFairdistill,jdbcType=BIT},
+      </if>
+      <if test="record.ifWfsy != null">
+      `if_wfsy` = #{record.ifWfsy,jdbcType=BIT}
+      </if>
+    </set>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update `sb_securities`
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+    <set>
+      `code` = #{record.code,jdbcType=VARCHAR},
+      `help_code` = #{record.helpCode,jdbcType=VARCHAR},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      `bourse_id` = #{record.bourseId,jdbcType=INTEGER},
+      `sclassify_id` = #{record.sclassifyId,jdbcType=INTEGER},
+      `exercise_date` = #{record.exerciseDate,jdbcType=DATE},
+      `exercise_price` = #{record.exercisePrice,jdbcType=DECIMAL},
+      `if_accrual` = #{record.ifAccrual,jdbcType=BIT},
+      `if_fairdistill` = #{record.ifFairdistill,jdbcType=BIT},
+      `if_wfsy` = #{record.ifWfsy,jdbcType=BIT}
+    </set>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sb.dao.securities.model.Securities">
+    update `sb_securities`
+    <set>
+      <if test="code != null">
+      `code` = #{code,jdbcType=VARCHAR}, 
+      </if>
+      <if test="helpCode != null">
+      `help_code` = #{helpCode,jdbcType=VARCHAR}, 
+      </if>
+      <if test="name != null">
+      `name` = #{name,jdbcType=VARCHAR}, 
+      </if>
+      <if test="bourseId != null">
+      `bourse_id` = #{bourseId,jdbcType=INTEGER}, 
+      </if>
+      <if test="sclassifyId != null">
+      `sclassify_id` = #{sclassifyId,jdbcType=INTEGER}, 
+      </if>
+      <if test="exerciseDate != null">
+      `exercise_date` = #{exerciseDate,jdbcType=DATE}, 
+      </if>
+      <if test="exercisePrice != null">
+      `exercise_price` = #{exercisePrice,jdbcType=DECIMAL}, 
+      </if>
+      <if test="ifAccrual != null">
+      `if_accrual` = #{ifAccrual,jdbcType=BIT}, 
+      </if>
+      <if test="ifFairdistill != null">
+      `if_fairdistill` = #{ifFairdistill,jdbcType=BIT}, 
+      </if>
+      <if test="ifWfsy != null">
+      `if_wfsy` = #{ifWfsy,jdbcType=BIT}
+      </if>
+    </set>
+    where `id` = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sb.dao.securities.model.Securities">
+    update `sb_securities`
+    <set>
+      `code` = #{code,jdbcType=VARCHAR}, 
+      `help_code` = #{helpCode,jdbcType=VARCHAR}, 
+      `name` = #{name,jdbcType=VARCHAR}, 
+      `bourse_id` = #{bourseId,jdbcType=INTEGER}, 
+      `sclassify_id` = #{sclassifyId,jdbcType=INTEGER}, 
+      `exercise_date` = #{exerciseDate,jdbcType=DATE}, 
+      `exercise_price` = #{exercisePrice,jdbcType=DECIMAL}, 
+      `if_accrual` = #{ifAccrual,jdbcType=BIT}, 
+      `if_fairdistill` = #{ifFairdistill,jdbcType=BIT}, 
+      `if_wfsy` = #{ifWfsy,jdbcType=BIT}
+    </set>
+    where `id` = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

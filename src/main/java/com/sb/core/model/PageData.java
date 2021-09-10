@@ -1,0 +1,67 @@
+package com.sb.core.model;
+
+import java.io.Serializable;
+import java.util.List;
+
+import com.github.pagehelper.PageInfo;
+
+import lombok.Data;
+
+/**
+ * 分页对象
+ * 
+ * @author 蛋挞的胖可乐
+ * @date 2021/09/10 11:23
+ */
+@Data
+public class PageData<T> implements Serializable {
+
+    // 目标页
+    private int page;
+
+    // 一页多少行
+    private int capacity;
+
+    // 总记录数
+    private long total;
+
+    // 当前的数据
+    private List<T> records;
+
+    public PageData(int page, int capacity) {
+        this.page = page;
+        this.capacity = capacity;
+    }
+
+    public static <T> PageData<T> from(PageInfo<T> pageInfo) {
+        PageData<T> pageData = new PageData<>(pageInfo.getPageNum(), pageInfo.getPageSize());
+        pageData.total = pageInfo.getTotal();
+        pageData.records = pageInfo.getList();
+        return pageData;
+    }
+
+    /**
+     * 处理异常页容量
+     * 
+     * @author 蛋挞的胖可乐
+     * @date 2021/09/10 11:23
+     */
+    public int getCapacity() {
+        return capacity <= 0 ? 10 : capacity;
+    }
+
+    /**
+     * 计算总页码
+     * 
+     * @author 蛋挞的胖可乐
+     * @date 2021/09/10 11:23
+     */
+    public long getPageCount() {
+        if (this.getTotal() % this.getCapacity() == 0) {
+            long pc = this.getTotal() / this.getCapacity();
+            return pc == 0 ? 1 : pc;
+        }
+        return this.getTotal() / this.getCapacity() + 1;
+    }
+
+}

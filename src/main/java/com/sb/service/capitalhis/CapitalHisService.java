@@ -1,0 +1,96 @@
+package com.sb.service.capitalhis;
+
+import java.util.List;
+
+import com.sb.core.model.PageData;
+import com.sb.core.model.PageWrap;
+import com.sb.dao.capitalhis.model.CapitalHis;
+
+/**
+ * 证券历史属性Service定义
+ * 
+ * @author 蛋挞的胖可乐
+ * @date 2021/09/10 15:40
+ */
+public interface CapitalHisService {
+
+    /**
+     * 创建
+     * 
+     * @author 蛋挞的胖可乐
+     * @date 2021/09/10 15:40
+     */
+    Integer create(CapitalHis capitalHis);
+
+    /**
+     * 主键删除
+     * 
+     * @author 蛋挞的胖可乐
+     * @date 2021/09/10 15:40
+     */
+    void deleteById(Integer id);
+
+    /**
+     * 批量主键删除
+     * 
+     * @author 蛋挞的胖可乐
+     * @date 2021/09/10 15:40
+     */
+    void deleteByIdInBatch(List<Integer> ids);
+
+    /**
+     * 主键更新
+     * 
+     * @author 蛋挞的胖可乐
+     * @date 2021/09/10 15:40
+     */
+    void updateById(CapitalHis capitalHis);
+
+    /**
+     * 批量主键更新
+     * 
+     * @author 蛋挞的胖可乐
+     * @date 2021/09/10 15:40
+     */
+    void updateByIdInBatch(List<CapitalHis> capitalHiss);
+
+    /**
+     * 主键查询
+     * 
+     * @author 蛋挞的胖可乐
+     * @date 2021/09/10 15:40
+     */
+    CapitalHis findById(Integer id);
+
+    /**
+     * 条件查询单条记录
+     * 
+     * @author 蛋挞的胖可乐
+     * @date 2021/09/10 15:40
+     */
+    CapitalHis findOne(CapitalHis capitalHis);
+
+    /**
+     * 条件查询
+     * 
+     * @author 蛋挞的胖可乐
+     * @date 2021/09/10 15:40
+     */
+    List<CapitalHis> findList(CapitalHis capitalHis);
+
+    /**
+     * 分页查询
+     * 
+     * @author 蛋挞的胖可乐
+     * @date 2021/09/10 15:40
+     */
+    PageData<CapitalHis> findPage(PageWrap<CapitalHis> pageWrap);
+
+    /**
+     * 条件统计
+     * 
+     * @author 蛋挞的胖可乐
+     * @date 2021/09/10 15:40
+     */
+    long count(CapitalHis capitalHis);
+}
